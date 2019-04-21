@@ -10,7 +10,7 @@ namespace GuessMyNumber
     {
         public void RunProg()
         {
-            GuessMethods guessMe GuessMethods;
+            GuessMethods guessMe = new GuessMethods();
         }
     }
 }

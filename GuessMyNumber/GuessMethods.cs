@@ -42,6 +42,29 @@ namespace GuessMyNumber
             }
         }
 
+        // this will be set to 1000, if larger numbers are needed
+        // an additional variable will be needed (for another time)
+        public int ComputerFirstGuess(int guess, int limit)
+        {
+            guess = limit / 2;
+            return guess;
+        }
+
+        // guess where the value is less than guess
+        public int ComputerLessThanGuesses(int guess, int limit)
+        {
+            guess = guess - (guess / 2); 
+            return guess;
+        }
+
+        // guesses where the value is greater than guess
+        public int ComputerGreaterGuesses(int guess, int limit)
+        {
+            guess = (guess + limit) / 2;
+            return guess;
+        }
+
+        // first part of the assignment
         public void GuessOneTen()
         {
             Random rnd = new Random();
@@ -53,28 +76,63 @@ namespace GuessMyNumber
                 // catching the execption before running through the code and breaking the system
                 UserEntry(guess);
                 CompareValues(guess, value);
+
             } while (guess != value);
 
 
         }
 
+        // method for player guessing (might be needing the log)
         public void PersonGuess()
         {
             Random rnd = new Random();
             int guess = 1;
             int value = rnd.Next(1, 1001);
-
+            // needs equation (log thing) to track how many chances are left
             do
             {
                 UserEntry(guess);
                 CompareValues(guess, value);
+
             } while (guess != value);
         }
 
+        // method for computer guessing
         public void ComputerGuess()
         {
-            int guess;
-            int value;
+            int guess = 1;
+            int value = 0;
+            int count = 1;
+            int limit = 1000;
+
+            try
+            {
+                Console.WriteLine($"Please enter value between 1 and {limit}");
+                value = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid Input");
+            }
+
+            do
+            {
+                if (count == 1)
+                {
+                    ComputerFirstGuess(guess, limit);
+                }
+                else if (guess < value)
+                {
+                    ComputerLessThanGuesses(guess, limit);
+                }
+                else
+                {
+                    ComputerGreaterGuesses(guess, limit);
+                }
+                count++;
+            } while (guess != value);
+
+            Console.WriteLine($"The computer took {count} guesses to succeed");
         }
     }
 }
