@@ -9,18 +9,17 @@ namespace GuessMyNumber
     public class GuessMethods
     {        
         // remove redundant code for user guess and or choice
-        public int UserEntry(int guess)
+        public void UserEntry(ref int guess, int limit)
         {
             try
             {
-                Console.WriteLine("Guess a number between 1 and 10");
+                Console.WriteLine($"Guess a number between 1 and {limit}");
                 guess = Convert.ToInt32(Console.ReadLine());
             }
             catch (Exception)
             {
                 Console.WriteLine("Invalid Entry");
             }
-            return guess;
         }
 
         // method to take and compare the guess with the set value
@@ -44,24 +43,25 @@ namespace GuessMyNumber
 
         // this will be set to 1000, if larger numbers are needed
         // an additional variable will be needed (for another time)
-        public int ComputerFirstGuess(int guess, int limit)
+        public void ComputerFirstGuess(ref int guess, int limit)
         {
-            guess = limit / 2;
-            return guess;
+            guess = limit / 2;            
         }
 
         // guess where the value is less than guess
-        public int ComputerLessThanGuesses(int guess, int limit)
+        public void ComputerLessThanGuesses(ref int guess, ref int limit)
         {
-            guess = guess - (guess / 2); 
-            return guess;
+            // setting limit equal to guess to attempt to lower the likelihood of never ending loop
+            // due to limit always being greater than the previous guesses that were smaller than
+            // limit but larger than value
+            limit = guess;
+            guess = guess - (guess / 2);             
         }
 
         // guesses where the value is greater than guess
-        public int ComputerGreaterGuesses(int guess, int limit)
+        public void ComputerGreaterGuesses(ref int guess, int limit)
         {
-            guess = (guess + limit) / 2;
-            return guess;
+            guess = (guess + limit) / 2;            
         }
 
         // first part of the assignment
@@ -69,13 +69,14 @@ namespace GuessMyNumber
         {
             Random rnd = new Random();
             int guess = 1;
-            int value = rnd.Next(1, 11);
+            int limit = 10;
+            int value = rnd.Next(1, (limit + 1));
             bool checker = false;
 
             do
             {
                 // catching the execption before running through the code and breaking the system
-                UserEntry(guess);
+                UserEntry(ref guess, limit);
                 CompareValues(guess, value);
                 if (guess == value)
                 {
@@ -83,8 +84,7 @@ namespace GuessMyNumber
                 }
 
             } while (checker == false);
-
-
+            Console.WriteLine("CORRECT!!");
         }
 
         // method for player guessing (might be needing the log)
@@ -92,14 +92,16 @@ namespace GuessMyNumber
         {
             Random rnd = new Random();
             int guess = 1;
-            int value = rnd.Next(1, 1001);
+            int limit = 1000;
+            int value = rnd.Next(1, (limit + 1));
             // needs equation (log thing) to track how many chances are left
             do
             {
-                UserEntry(guess);
+                UserEntry(ref guess, limit);
                 CompareValues(guess, value);
 
             } while (guess != value);
+            Console.WriteLine("CORRECT!!!");
         }
 
         // method for computer guessing
@@ -124,15 +126,15 @@ namespace GuessMyNumber
             {
                 if (count == 1)
                 {
-                    ComputerFirstGuess(guess, limit);
+                    ComputerFirstGuess(ref guess, limit);
                 }
-                else if (guess < value)
+                else if (guess > value)
                 {
-                    ComputerLessThanGuesses(guess, limit);
+                    ComputerLessThanGuesses(ref guess, ref limit);
                 }
                 else
                 {
-                    ComputerGreaterGuesses(guess, limit);
+                    ComputerGreaterGuesses(ref guess, limit);
                 }
                 count++;
             } while (guess != value);

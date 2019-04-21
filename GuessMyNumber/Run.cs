@@ -13,9 +13,9 @@ namespace GuessMyNumber
             GuessMethods guessMe = new GuessMethods();
 
             guessMe.GuessOneTen();
-
+            Console.Clear();
             guessMe.PersonGuess();
-
+            Console.Clear();
             guessMe.ComputerGuess();
         }
     }
