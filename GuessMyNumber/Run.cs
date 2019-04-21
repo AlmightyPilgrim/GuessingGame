@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace GuessMyNumber
 {
-    class Program
+    class Run
     {
-        static void Main(string[] args)
+        public void RunProg()
         {
-            GuessMethods myGuess = GuessMethods();
+            GuessMethods guessMe GuessMethods;
         }
     }
 }
