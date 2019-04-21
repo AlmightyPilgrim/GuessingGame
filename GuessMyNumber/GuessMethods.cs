@@ -41,29 +41,6 @@ namespace GuessMyNumber
             }
         }
 
-        // this will be set to 1000, if larger numbers are needed
-        // an additional variable will be needed (for another time)
-        public void ComputerFirstGuess(ref int guess, int limit)
-        {
-            guess = limit / 2;            
-        }
-
-        // guess where the value is less than guess
-        public void ComputerLessThanGuesses(ref int guess, ref int limit)
-        {
-            // setting limit equal to guess to attempt to lower the likelihood of never ending loop
-            // due to limit always being greater than the previous guesses that were smaller than
-            // limit but larger than value
-            limit = guess;
-            guess = guess - (guess / 2);             
-        }
-
-        // guesses where the value is greater than guess
-        public void ComputerGreaterGuesses(ref int guess, int limit)
-        {
-            guess = (guess + limit) / 2;            
-        }
-
         // first part of the assignment
         public void GuessOneTen()
         {
@@ -102,6 +79,29 @@ namespace GuessMyNumber
 
             } while (guess != value);
             Console.WriteLine("CORRECT!!!");
+        }
+
+        // this will be set to 1000, if larger numbers are needed
+        // an additional variable will be needed (for another time)
+        public void ComputerFirstGuess(ref int guess, int limit)
+        {
+            guess = limit / 2;            
+        }
+
+        // guess where the value is less than guess
+        public void ComputerLessThanGuesses(ref int guess, ref int limit)
+        {
+            // setting limit equal to guess to attempt to lower the likelihood of never ending loop
+            // due to limit always being greater than the previous guesses that were smaller than
+            // limit but larger than value
+            limit = guess;
+            guess = guess - (guess / 2);             
+        }
+
+        // guesses where the value is greater than guess
+        public void ComputerGreaterGuesses(ref int guess, int limit)
+        {
+            guess = (guess + limit) / 2;            
         }
 
         // method for computer guessing
