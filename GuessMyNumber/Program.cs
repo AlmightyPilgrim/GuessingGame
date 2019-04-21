@@ -10,7 +10,9 @@ namespace GuessMyNumber
     {
         static void Main(string[] args)
         {
-            GuessMethods myGuess = GuessMethods();
+            Run runMe = new Run();
+
+            runMe.RunProg();
         }
     }
 }

@@ -11,6 +11,12 @@ namespace GuessMyNumber
         public void RunProg()
         {
             GuessMethods guessMe = new GuessMethods();
+
+            guessMe.GuessOneTen();
+
+            guessMe.PersonGuess();
+
+            guessMe.ComputerGuess();
         }
     }
 }

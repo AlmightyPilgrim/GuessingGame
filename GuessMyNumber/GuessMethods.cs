@@ -70,14 +70,19 @@ namespace GuessMyNumber
             Random rnd = new Random();
             int guess = 1;
             int value = rnd.Next(1, 11);
+            bool checker = false;
 
             do
             {
                 // catching the execption before running through the code and breaking the system
                 UserEntry(guess);
                 CompareValues(guess, value);
+                if (guess == value)
+                {
+                    checker = true;
+                }
 
-            } while (guess != value);
+            } while (checker == false);
 
 
         }
